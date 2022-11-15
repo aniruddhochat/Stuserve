@@ -21,12 +21,14 @@ app.use(fileUpload());
 const service = require("./routes/serviceRoute");
 const user = require("./routes/userRoute");
 const provider = require("./routes/providerRoute");
+const category = require("./routes/categoryRoute");
 // const order = require("./routes/orderRoute");
 // const payment = require("./routes/paymentRoute");
 
 app.use("/api/v1", service);
 app.use("/api/v1", user);
 app.use("/api/v1", provider);
+app.use("/api/v1", category);
 // app.use("/api/v1", order);
 // app.use("/api/v1", payment);
 

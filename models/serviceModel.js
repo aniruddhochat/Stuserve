@@ -35,6 +35,10 @@ const serviceSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Enter service Category"],
   },
+  type: {
+    type: String,
+    required: [true, "Please Enter Rental or Service"],
+  },
   numOfReviews: {
     type: Number,
     default: 0,
@@ -46,11 +50,16 @@ const serviceSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  tags: [],
   reviews: [
     {
       user: {
         type: mongoose.Schema.ObjectId,
         ref: "User",
+        required: true,
+      },
+      name: {
+        type: String,
         required: true,
       },
       rating: {
