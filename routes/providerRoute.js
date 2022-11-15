@@ -10,6 +10,7 @@ const {
   updateProfile,
   getAllProvider,
   getSingleProvider,
+  getAllProviderDetails,
   updateProviderRole,
   deleteProvider,
 } = require("../controllers/providerController");
@@ -30,7 +31,9 @@ router.route("/password/resetprovider/:token").put(resetPassword);
 
 router.route("/logoutprovider").get(logout);
 
-router.route("/meprovider").get(isAuthenticatedProvider, getProviderDetails);
+// Unauthorized view providers (hides important provider info like password)
+router.route("/providerdetails/:id").get(getProviderDetails);
+router.route("/providerdetails").get(getAllProviderDetails);
 
 router
   .route("/password/updateprovider")

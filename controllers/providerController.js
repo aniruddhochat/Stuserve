@@ -159,11 +159,21 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 // Get Provider Detail
 exports.getProviderDetails = catchAsyncErrors(async (req, res, next) => {
-  const provider = await Provider.findById(req.provider.id);
+  const provider = await Provider.findById(req.params.id);
 
   res.status(200).json({
     success: true,
     provider,
+  });
+});
+
+// Get All Provider Detail
+exports.getAllProviderDetails = catchAsyncErrors(async (req, res, next) => {
+  const providers = await Provider.find();
+
+  res.status(200).json({
+    success: true,
+    providers,
   });
 });
 
