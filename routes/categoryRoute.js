@@ -1,7 +1,7 @@
 const express = require("express");
 const {
   createCategory,
-  getCategory,
+  getAllCategory,
 } = require("../controllers/categoryController");
 const {
   isAuthenticatedProvider,
