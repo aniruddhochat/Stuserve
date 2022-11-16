@@ -12,7 +12,7 @@ exports.createCategory = catchAsyncErrors(async (req, res, next) => {
 });
 
 //  Get All Category
-exports.getCategory = catchAsyncErrors(async (req, res, next) => {
+exports.getAllCategory = catchAsyncErrors(async (req, res, next) => {
   const category = await Category.find();
 
   res.status(200).json({

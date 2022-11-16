@@ -10,7 +10,7 @@ const {
 
 const router = express.Router();
 
-router.route("/getcategory").get(getCategory);
+router.route("/getcategory").get(getAllCategory);
 
 router.route("/admin/category/new").post(createCategory);
 
