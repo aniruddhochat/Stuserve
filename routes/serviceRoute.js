@@ -28,7 +28,8 @@ router.route("/admin/service/new").post(createService);
 
 router
   .route("/admin/service/:id")
-  .put(isAuthenticatedUser, authorizeRoles("admin"), updateService)
+  //.put(isAuthenticatedUser, authorizeRoles("admin"), updateService)
+  .put(updateService)
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteService);
 
 router.route("/service/:id").get(getServiceDetails);

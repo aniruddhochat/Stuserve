@@ -177,12 +177,12 @@ exports.createServiceReview = catchAsyncErrors(async (req, res, next) => {
   console.log(service);
 
   const isReviewed = service.reviews.find(
-    (rev) => rev.user.toString() === req.body._id
+    (rev) => rev.user === req.body._id
   );
 
   if (isReviewed) {
     service.reviews.forEach((rev) => {
-      if (rev.user.toString() === req.body._id)
+      if (rev.user === req.body._id)
         (rev.rating = rating), (rev.comment = comment);
     });
   } else {
