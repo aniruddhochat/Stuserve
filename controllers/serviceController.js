@@ -176,19 +176,22 @@ exports.createServiceReview = catchAsyncErrors(async (req, res, next) => {
   const service = await Service.findById(serviceId);
   console.log(service);
 
-  const isReviewed = service.reviews.find(
-    (rev) => rev.user === req.body._id
-  );
+  // const isReviewed = service.reviews.find(
+  //   (rev) => rev.user === req.body._id
+  // );
 
-  if (isReviewed) {
-    service.reviews.forEach((rev) => {
-      if (rev.user === req.body._id)
-        (rev.rating = rating), (rev.comment = comment);
-    });
-  } else {
-    service.reviews.push(review);
-    service.numOfReviews = service.reviews.length;
-  }
+  // if (isReviewed) {
+  //   service.reviews.forEach((rev) => {
+  //     if (rev.user === req.body._id)
+  //       (rev.rating = rating), (rev.comment = comment);
+  //   });
+  // } else {
+  //   service.reviews.push(review);
+  //   service.numOfReviews = service.reviews.length;
+  // }
+
+  service.reviews.push(review);
+  service.numOfReviews = service.reviews.length;
 
   let avg = 0;
 
