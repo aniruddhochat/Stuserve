@@ -3,6 +3,8 @@ const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary");
+const object = require("mongodb");
+//import { ObjectId } from 'mongodb'
 
 // Create Service -- Admin
 exports.createService = catchAsyncErrors(async (req, res, next) => {
@@ -172,7 +174,13 @@ exports.createServiceReview = catchAsyncErrors(async (req, res, next) => {
     rating: Number(rating),
     comment,
   };
-
+  // const userobject = new object.ObjectId(user)
+  // const orderobject = new object.ObjectId(req.body.product)
+  // const orderStatus = "completed";
+  // const verified = await Orders.find(user, orderStatus);
+  // if (!verified) {
+  //   return next(new ErrorHander("Not eligible for review", 401));
+  // }
   const service = await Service.findById(serviceId);
   console.log(service);
 

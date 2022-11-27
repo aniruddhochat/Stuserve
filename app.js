@@ -18,11 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 
 app.use((_, res, next) => {
-  res.set('Access-Control-Allow-Origin', '*'); // or 'localhost:8888'
-  res.set('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
+  res.set("Access-Control-Allow-Origin", "*"); // or 'localhost:8888'
+  res.set("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
   res.set(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
   return next();
 }); // sets headers before routes
@@ -32,15 +32,15 @@ const service = require("./routes/serviceRoute");
 const user = require("./routes/userRoute");
 const provider = require("./routes/providerRoute");
 const category = require("./routes/categoryRoute");
-// const order = require("./routes/orderRoute");
-// const payment = require("./routes/paymentRoute");
+const order = require("./routes/orderRoute");
+const payment = require("./routes/paymentRoute");
 
 app.use("/api/v1", service);
 app.use("/api/v1", user);
 app.use("/api/v1", provider);
 app.use("/api/v1", category);
-// app.use("/api/v1", order);
-// app.use("/api/v1", payment);
+app.use("/api/v1", order);
+app.use("/api/v1", payment);
 
 // app.use(express.static(path.join(__dirname, "../frontend/build")));
 
