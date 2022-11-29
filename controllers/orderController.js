@@ -2,6 +2,8 @@ const Order = require("../models/orderModel");
 const Product = require("../models/serviceModel");
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const { default: Stripe } = require("stripe");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 //const object = require("mongodb");
 
 // Create new Order
