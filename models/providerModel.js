@@ -61,15 +61,15 @@ const providerSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please Enter Your Address"],
   },
-  pincode: {
-    type: String,
-    required: [true, "Please Enter Your Pincode"],
-    minLength: [5, "Pincode should be 5 numbers"],
-  },
-  currlocation: {
-    type: String,
-    required: [true, "Please Enter Your Current Location"],
-  },
+  // pincode: {
+  //   type: String,
+  //   required: [true, "Please Enter Your Pincode"],
+  //   minLength: [5, "Pincode should be 5 numbers"],
+  // },
+  // currlocation: {
+  //   type: String,
+  //   required: [true, "Please Enter Your Current Location"],
+  // },
   recentpasswordchange: {
     type: Boolean,
     default: false,
