@@ -23,8 +23,8 @@ exports.registerProvider = catchAsyncErrors(async (req, res, next) => {
   const phone = req.body.phone;
   const schoolyear = req.body.schoolyear;
   const address = req.body.address;
-  const pincode = req.body.pincode;
-  const currlocation = req.body.currlocation;
+  // const pincode = req.body.pincode;
+  // const currlocation = req.body.currlocation;
 
   const provider = await Provider.create({
     fname,
@@ -41,8 +41,8 @@ exports.registerProvider = catchAsyncErrors(async (req, res, next) => {
     phone,
     schoolyear,
     address,
-    pincode,
-    currlocation,
+    // pincode,
+    // currlocation,
   });
 
   sendToken(provider, 201, res);
