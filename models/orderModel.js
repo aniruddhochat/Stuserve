@@ -6,24 +6,24 @@ const orderSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    city: {
-      type: String,
-      required: true,
-    },
+    // city: {
+    //   type: String,
+    //   required: true,
+    // },
 
-    state: {
-      type: String,
-      required: true,
-    },
+    // state: {
+    //   type: String,
+    //   required: true,
+    // },
 
-    country: {
-      type: String,
-      required: true,
-    },
-    zipCode: {
-      type: Number,
-      required: true,
-    },
+    // country: {
+    //   type: String,
+    //   required: true,
+    // },
+    // zipCode: {
+    //   type: Number,
+    //   required: true,
+    // },
     phoneNo: {
       type: Number,
       required: true,
