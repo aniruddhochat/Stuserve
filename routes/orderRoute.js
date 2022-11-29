@@ -28,7 +28,9 @@ router.route("/provider/orders").get(getAllOrders);
 
 router
   .route("/provider/order/:id")
-  .put(isAuthenticatedUser, authorizeRoles("provider"), updateOrder)
-  .delete(isAuthenticatedUser, authorizeRoles("provider"), deleteOrder);
+  //.put(isAuthenticatedProvider, authorizeRoles("provider"), updateOrder)
+  //.delete(isAuthenticatedProvider, authorizeRoles("provider"), deleteOrder);
+  .put(isAuthenticatedProvider, updateOrder)
+  .delete(isAuthenticatedProvider, deleteOrder);
 
 module.exports = router;

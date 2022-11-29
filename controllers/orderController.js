@@ -114,6 +114,9 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
   order.orderStatus = req.body.status;
 
   if (req.body.status === "Completed") {
+    const charge = await stripe.charges.capture(
+      req.body.chargeId
+    );
     order.deliveredAt = Date.now();
   }
 
