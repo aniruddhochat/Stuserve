@@ -7,7 +7,9 @@ const {
     approveProvider,
     approveService,
     createAdmin,
-    getAllAdmins
+    getAllAdmins,
+    loginAdmin,
+    deleteAdmin
 } = require("../controllers/adminController");
 const {
   isAuthenticatedProvider,
@@ -15,6 +17,10 @@ const {
 } = require("../middleware/auth");
 
 const router = express.Router();
+
+router.route("/deleteAdmin/:id").delete(deleteAdmin);
+
+router.route("/loginAdmin").post(loginAdmin);
 
 router.route("/getAllAdmins").get(getAllAdmins);
 

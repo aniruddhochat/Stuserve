@@ -26,6 +26,48 @@ exports.createAdmin = catchAsyncErrors(async (req, res, next) => {
 });
 
 
+// Login Admin
+exports.loginAdmin = catchAsyncErrors(async (req, res, next) => {
+    const { email, password } = req.body;
+  
+    const admin = await Admin.findOne({
+      $or: [{ email: email }, { username: email }],
+    }).select("+password");
+  
+    if (!admin) {
+      return next(new ErrorHander("Invalid email or password+", 401));
+    }
+  
+    const isPasswordMatched = await admin.comparePassword(password);
+  
+    if (!isPasswordMatched) {
+      return next(new ErrorHander("Invalid email or password-", 401));
+    }
+  
+    sendToken(admin, 200, res);
+});
+
+
+
+// Delete Admin
+exports.deleteAdmin = catchAsyncErrors(async (req, res, next) => {
+    const admin = await Admin.findById(req.params.id);
+  
+    if (!admin) {
+      return next(
+        new ErrorHander(`Admin does not exist with Id: ${req.params.id}`, 400)
+      );
+    }  
+  
+    await admin.remove();
+  
+    res.status(200).json({
+      success: true,
+      message: "Admin Deleted Successfully",
+    });
+});
+
+
 // Get all admin accounts
 exports.getAllAdmins = catchAsyncErrors(async (req, res, next) => {
     const admins = await Admin.find();
