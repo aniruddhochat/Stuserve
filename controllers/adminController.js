@@ -4,20 +4,46 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary");
 const object = require("mongodb");
-
+const sendToken = require("../utils/jwtToken");
 const Provider = require("../models/providerModel");
-
-
+const Admin = require("../models/adminModel");
 
 
 
 // Get not Approved provider
+exports.createAdmin = catchAsyncErrors(async (req, res, next) => {
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+    
+    const admin = await Admin.create({
+        email,
+        username,
+        password
+    });
+    
+    sendToken(admin, 201, res);
+});
+
+
+// Get all admin accounts
+exports.getAllAdmins = catchAsyncErrors(async (req, res, next) => {
+    const admins = await Admin.find();
+    
+      res.status(200).json({
+        success: true,
+        admins,
+      });
+  });
+
+
+// Get not Approved providers
 exports.getAllAdminProviders = catchAsyncErrors(async (req, res, next) => {
-  const provider = await Provider.find({isApproved:0});
+  const providers = await Provider.find({isApproved:0});
   
     res.status(200).json({
       success: true,
-      provider,
+      providers,
     });
 });
 

@@ -1,6 +1,7 @@
 //Approve and dis-apporve
 const mongoose = require("mongoose");
 const Provider = require("../models/providerModel");
+const validator = require("validator");
 
 
 
@@ -17,6 +18,12 @@ const adminSchema = new mongoose.Schema({
       required: [true, "Please Generate Your Unique Username"],
       unique: true,
     },
+    password: {
+        type: String,
+        required: [true, "Please Enter Your Password"],
+        minLength: [8, "Password should be greater than 8 characters"],
+        select: false,
+    },
     role: {
       type: String,
       default: "admin",
@@ -28,5 +35,12 @@ const adminSchema = new mongoose.Schema({
     // resetPasswordToken: String,
     // resetPasswordExpire: Date,
 });
+
+// JWT TOKEN
+adminSchema.methods.getJWTToken = function () {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRE,
+    });
+};
 
 module.exports = mongoose.model("admin", adminSchema);
