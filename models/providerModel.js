@@ -44,6 +44,10 @@ const providerSchema = new mongoose.Schema({
       required: true,
     },
   },
+  isApproved:{
+    type: Number,
+    default: 0
+  },
   role: {
     type: String,
     default: "provider",

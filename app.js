@@ -36,6 +36,7 @@ const provider = require("./routes/providerRoute");
 const category = require("./routes/categoryRoute");
 const order = require("./routes/orderRoute");
 const payment = require("./routes/paymentRoute");
+const admin = require("./routes/adminRoute");
 
 app.use("/api/v1", service);
 app.use("/api/v1", user);
@@ -43,6 +44,8 @@ app.use("/api/v1", provider);
 app.use("/api/v1", category);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
+app.use("/api/v1", admin);
+
 
 // app.use(express.static(path.join(__dirname, "../frontend/build")));
 
