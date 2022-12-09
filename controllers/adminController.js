@@ -7,6 +7,9 @@ const object = require("mongodb");
 const sendToken = require("../utils/jwtToken");
 const Provider = require("../models/providerModel");
 const Admin = require("../models/adminModel");
+const User = require("../models/userModel");
+const Order = require("../models/orderModel");
+
 
 
 
@@ -109,7 +112,52 @@ exports.adminDeleteProvider = catchAsyncErrors(async (req, res, next) => {
       success: true,
       message: "Provider Deleted Successfully",
     });
-  });
+});
+
+
+
+exports.adminDeleteOrder = catchAsyncErrors(async (req, res, next) => {
+    const order = await Order.findById(req.params.id);
+  
+    if (!order) {
+      return next(
+        new ErrorHander(`Provider does not exist with Id: ${req.params.id}`, 400)
+      );
+    }
+    
+    //   await cloudinary.v2.uploader.destroy(imageId);
+  
+    await order.remove();
+  
+    res.status(200).json({
+      success: true,
+      message: "Order Deleted Successfully",
+    });
+});
+
+
+  // Delete Provider --Admin
+exports.adminDeleteConsumer = catchAsyncErrors(async (req, res, next) => {
+    const consumer = await User.findById(req.params.id);
+  
+    if (!consumer) {
+      return next(
+        new ErrorHander(`Consumer does not exist with Id: ${req.params.id}`, 400)
+      );
+    }
+  
+    const imageId = consumer.avatar.public_id;
+  
+    //   await cloudinary.v2.uploader.destroy(imageId);
+  
+    await consumer.remove();
+  
+    res.status(200).json({
+      success: true,
+      message: "Consumer Deleted Successfully",
+    });
+});
+
 
   // Accept or delete Service
 exports.adminGetAllServicesApproval = catchAsyncErrors(async (req, res, next) => {
@@ -180,3 +228,5 @@ exports.approveService = catchAsyncErrors(async (req, res, next) => {
     service
   });
 });
+
+

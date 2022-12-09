@@ -9,7 +9,9 @@ const {
     createAdmin,
     getAllAdmins,
     loginAdmin,
-    deleteAdmin
+    deleteAdmin,
+    adminDeleteConsumer,
+    adminDeleteOrder
 } = require("../controllers/adminController");
 const {
   isAuthenticatedProvider,
@@ -28,7 +30,10 @@ router.route("/createAdmin").post(createAdmin);
 
 router.route("/getAllAdminProviders").get(getAllAdminProviders);
 
-router.route("/adminDeleteProvider").post(adminDeleteProvider);
+router.route("/adminDeleteProvider/:id").delete(adminDeleteProvider);
+router.route("/adminDeleteConsumer/:id").delete(adminDeleteConsumer);
+router.route("/adminDeleteOrder/:id").delete(adminDeleteOrder);
+
 
 router.route("/adminGetAllServicesApproval").get(adminGetAllServicesApproval);
 router.route("/adminDeleteService/:id").delete(adminDeleteService);
