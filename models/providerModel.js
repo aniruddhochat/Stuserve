@@ -80,7 +80,7 @@ const providerSchema = new mongoose.Schema({
     default: false,
   },
 
-  recivedChat: [
+  receivedChat: [
     {
       user: {
         type: mongoose.Schema.ObjectId,

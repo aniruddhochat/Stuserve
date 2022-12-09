@@ -34,7 +34,7 @@ exports.createChatUser = catchAsyncErrors(async (req, res, next) => {
   user.sentChat.push(msgu);
 
   const provider = await Provider.findById(req.body.provider);
-  provider.recivedChat.push(msgp);
+  provider.receivedChat.push(msgp);
 
   await user.save({ validateBeforeSave: false });
   await provider.save({ validateBeforeSave: false });
@@ -61,7 +61,7 @@ exports.createChatProvider = catchAsyncErrors(async (req, res, next) => {
   provider.sentChat.push(msgu);
 
   const user = await User.findById(req.body.user);
-  user.recivedChat.push(msgp);
+  user.receivedChat.push(msgp);
 
   await user.save({ validateBeforeSave: false });
   await provider.save({ validateBeforeSave: false });

@@ -77,7 +77,7 @@ const userSchema = new mongoose.Schema({
   },
   interests: [],
 
-  recivedChat: [
+  receivedChat: [
     {
       provider: {
         type: mongoose.Schema.ObjectId,
