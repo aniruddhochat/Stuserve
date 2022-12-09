@@ -4,6 +4,8 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const path = require("path");
+// const http = require("http").Server(app);
+// const io = require("socket.io")(http);
 
 const errorMiddleware = require("./middleware/error");
 
@@ -19,7 +21,7 @@ app.use(fileUpload());
 
 app.use((_, res, next) => {
   // res.set("Access-Control-Allow-Origin", "*"); // or 'localhost:8888'
-  res.set("Access-Control-Allow-Origin", "http://localhost:4200")
+  res.set("Access-Control-Allow-Origin", "http://localhost:4200");
   res.set("Access-Control-Allow-Credentials", "true");
   res.set("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
   res.set(
@@ -37,6 +39,11 @@ const category = require("./routes/categoryRoute");
 const order = require("./routes/orderRoute");
 const payment = require("./routes/paymentRoute");
 const admin = require("./routes/adminRoute");
+const chat = require("./routes/chatRoute");
+
+// io.on("connection", (socket) => {
+//   console.log("user connected");
+// });
 
 app.use("/api/v1", service);
 app.use("/api/v1", user);
@@ -45,7 +52,7 @@ app.use("/api/v1", category);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
 app.use("/api/v1", admin);
-
+app.use("/api/v1", chat);
 
 // app.use(express.static(path.join(__dirname, "../frontend/build")));
 

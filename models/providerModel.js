@@ -44,9 +44,9 @@ const providerSchema = new mongoose.Schema({
       required: true,
     },
   },
-  isApproved:{
+  isApproved: {
     type: Number,
-    default: 0
+    default: 0,
   },
   role: {
     type: String,
@@ -78,6 +78,41 @@ const providerSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+
+  recivedChat: [
+    {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: false,
+      },
+      message: {
+        type: String,
+        required: false,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  sentChat: [
+    {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: false,
+      },
+      message: {
+        type: String,
+        required: false,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
 
   resetPasswordToken: String,
   resetPasswordExpire: Date,

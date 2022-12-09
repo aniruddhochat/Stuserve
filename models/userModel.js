@@ -76,6 +76,41 @@ const userSchema = new mongoose.Schema({
   },
   interests: [],
 
+  recivedChat: [
+    {
+      provider: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Provider",
+        required: false,
+      },
+      message: {
+        type: String,
+        required: false,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  sentChat: [
+    {
+      provider: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Provider",
+        required: false,
+      },
+      message: {
+        type: String,
+        required: false,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
