@@ -45,19 +45,46 @@ exports.createChatUser = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-exports.createChatProvider = catchAsyncErrors(async (req, res, next) => {
-  const saveUserChat = await User.updateOne(
-    { user: req.body.user },
-    { $push: { recivedChat: req.body.sentChat } }
-  );
 
-  const saveProviderChat = await Provider.updateOne(
-    { provider: req.body.provider },
-    { $push: { sentChat: req.body.sentChat } }
-  );
-  console.log(saveUserChat);
+exports.createChatProvider = catchAsyncErrors(async (req, res, next) => {
+  const msgu = {
+    user: req.body.user,
+    message: req.body.message,
+  };
+
+  const msgp = {
+    provider: req.body.provider,
+    message: req.body.message,
+  };
+
+  const provider = await Provider.findById(req.body.provider);
+  provider.sentChat.push(msgu);
+
+  const user = await User.findById(req.body.user);
+  user.recivedChat.push(msgp);
+
+  await user.save({ validateBeforeSave: false });
+  await provider.save({ validateBeforeSave: false });
+  console.log(provider);
   res.status(201).json({
     success: true,
-    saveProviderChat,
+    provider,
   });
 });
+
+// exports.createChatProvider = catchAsyncErrors(async (req, res, next) => {
+//   const saveUserChat = await User.updateOne(
+//     { user: req.body.user },
+//     { $push: { recivedChat: req.body.sentChat } }
+//   );
+
+//   const saveProviderChat = await Provider.updateOne(
+//     { provider: req.body.provider },
+//     { $push: { sentChat: req.body.sentChat } }
+//   );
+//   console.log(saveUserChat);
+//   res.status(201).json({
+//     success: true,
+//     saveProviderChat,
+//   });
+// });

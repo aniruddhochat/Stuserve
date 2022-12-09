@@ -2,7 +2,7 @@ const app = require("./app");
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/db");
 const http = require("http");
-const socketio = require("socket.io");
+//const socketio = require("socket.io");
 
 // Handling Uncaught Exception
 process.on("uncaughtException", (err) => {
