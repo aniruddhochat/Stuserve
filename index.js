@@ -1,6 +1,8 @@
 const app = require("./app");
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/db");
+const http = require("http");
+const socketio = require("socket.io");
 
 // Handling Uncaught Exception
 process.on("uncaughtException", (err) => {
@@ -23,7 +25,9 @@ cloudinary.config({
   api_secret: "QM11khJchbtosEg_EuPG52T3WlY",
 });
 
-const server = app.listen(process.env.PORT, () => {
+const server = http.createServer(app);
+
+server.listen(process.env.PORT, () => {
   console.log(`Server is working on http://localhost:${process.env.PORT}`);
 });
 

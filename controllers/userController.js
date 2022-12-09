@@ -8,11 +8,11 @@ const cloudinary = require("cloudinary");
 
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-    // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    //   folder: "avatars",
-    //   width: 150,
-    //   crop: "scale",
-    // });
+  // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+  //   folder: "avatars",
+  //   width: 150,
+  //   crop: "scale",
+  // });
 
   //const { name, email, password } = req.body;
   const fname = req.body.fname;
@@ -67,7 +67,6 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-
 // Get all users
 exports.getAllUserDetails = catchAsyncErrors(async (req, res, next) => {
   const users = await User.find();
@@ -106,14 +105,13 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   const resetPasswordUrl = `${req.protocol}://${req.get(
     "host"
-  )}/password/reset/${resetToken}`;
+  )}/api/v1/password/reset/${resetToken}`;
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
 
   try {
     await sendEmail({
       email: user.email,
-      subject: `Ecommerce Password Recovery`,
       message,
     });
 
@@ -154,7 +152,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   }
 
   if (req.body.password !== req.body.confirmPassword) {
-    return next(new ErrorHander("Password does not password", 400));
+    return next(new ErrorHander("Password does not match", 400));
   }
 
   user.password = req.body.password;
