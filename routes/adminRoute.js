@@ -16,6 +16,7 @@ const {
 const {
   isAuthenticatedProvider,
   authorizeRoles,
+  verifySocialUser,
 } = require("../middleware/auth");
 
 const router = express.Router();
@@ -24,7 +25,7 @@ router.route("/deleteAdmin/:id").delete(deleteAdmin);
 
 router.route("/loginAdmin").post(loginAdmin);
 
-router.route("/getAllAdmins").get(getAllAdmins);
+router.route("/getAllAdmins").get(verifySocialUser, getAllAdmins);
 
 router.route("/createAdmin").post(createAdmin);
 

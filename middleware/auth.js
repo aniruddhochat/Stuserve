@@ -3,6 +3,11 @@ const catchAsyncErrors = require("./catchAsyncErrors");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const Provider = require("../models/providerModel");
+const { GoogleAuth } = require('google-auth-library');
+const {OAuth2Client} = require('google-auth-library');
+const sendToken = require("../utils/jwtToken");
+
+const client = new OAuth2Client('155525793614-udf6ng70351hlvmtmfveafe83hpngl90.apps.googleusercontent.com');
 
 exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
   const { token } = req.cookies;
@@ -31,6 +36,44 @@ exports.isAuthenticatedProvider = catchAsyncErrors(async (req, res, next) => {
 
   next();
 });
+
+
+exports.verifySocialUser = function(req, res, next) {
+  // var GoogleAuth = require('google-auth-library');
+  //var auth = new GoogleAuth();
+  // check header or url parameters or post parameters for token
+  //var token = "";
+  // var tokenHeader = req.headers["authorization"];
+  // var items = tokenHeader.split(/[ ]+/);
+  // if (items.length > 1 && items[0].trim().toLowerCase() == "bearer") {
+  //     token = items[1];
+  //}
+  var token = req.body.idToken;
+  if (token) {
+      var verifyToken = new Promise(function(resolve, reject) {
+          client.verifyIdToken({
+            idToken: token,
+            audience: '155525793614-udf6ng70351hlvmtmfveafe83hpngl90.apps.googleusercontent.com', // If you have multiple [CLIENT_ID_1, CLIENT_ID_2, ...]
+          },
+              function(e, login) {
+                  console.log(e);
+                  if (login) {
+                      // var payload = login.getPayload();
+                      // var googleId = payload['sub'];
+                      // resolve(googleId);
+                      next();
+                  } else {
+                      reject("invalid token");
+                  }
+              }
+          )
+      }).catch(function(err) {
+        return next(err);
+      })
+  } else {
+      res.send("Please pass token");
+  }
+}
 
 exports.authorizeRoles = (...roles) => {
   return (req, res, next) => {

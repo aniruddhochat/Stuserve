@@ -13,10 +13,12 @@ const {
   getAllProviderDetails,
   updateProviderRole,
   deleteProvider,
+  loginProviderGoogle
 } = require("../controllers/providerController");
 const {
   isAuthenticatedProvider,
   authorizeRoles,
+  verifySocialUser,
 } = require("../middleware/auth");
 
 const router = express.Router();
@@ -24,6 +26,8 @@ const router = express.Router();
 router.route("/registerprovider").post(registerProvider);
 
 router.route("/loginprovider").post(loginProvider);
+
+router.route("/loginproviderGoogle").post(verifySocialUser, loginProviderGoogle);
 
 router.route("/password/forgotprovider").post(forgotPassword);
 

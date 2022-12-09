@@ -65,6 +65,18 @@ exports.loginProvider = catchAsyncErrors(async (req, res, next) => {
   sendToken(provider, 200, res);
 });
 
+
+// Login Provider through google (temporary fix, does not actually verify with google token)
+exports.loginProviderGoogle = catchAsyncErrors(async (req, res, next) => {
+  const provider = await Provider.findOne({email: req.body.email});
+
+  if (!provider) {
+    return next(new ErrorHander("Account does not exist", 401));
+  }
+
+  sendToken(provider, 200, res);
+});
+
 // Logout Provider
 exports.logout = catchAsyncErrors(async (req, res, next) => {
   res.cookie("token", null, {

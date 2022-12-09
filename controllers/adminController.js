@@ -81,7 +81,6 @@ exports.getAllAdmins = catchAsyncErrors(async (req, res, next) => {
       });
   });
 
-
 // Get not Approved providers
 exports.getAllAdminProviders = catchAsyncErrors(async (req, res, next) => {
   const providers = await Provider.find({isApproved:0});
