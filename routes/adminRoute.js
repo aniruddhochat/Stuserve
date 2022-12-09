@@ -31,12 +31,12 @@ router.route("/getAllAdminProviders").get(getAllAdminProviders);
 router.route("/adminDeleteProvider").post(adminDeleteProvider);
 
 router.route("/adminGetAllServicesApproval").get(adminGetAllServicesApproval);
+router.route("/adminDeleteService/:id").delete(adminDeleteService);
 
-router.route("/adminDeleteService").post(adminDeleteService);
 
-router.route("/approveProvider").post(approveProvider);
+router.route("/approveProvider/:id").post(approveProvider);
 
-router.route("/approveService").post(approveService);
+router.route("/approveService/:id").post(approveService);
 
 
 // // Unauthorized view providers (hides important provider info like password)

@@ -67,6 +67,36 @@ exports.getAllServices = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+
+// Get All Service Of A Category
+exports.getApprovedServices = catchAsyncErrors(async (req, res, next) => {
+  //const resultPerPage = 8;
+  const servicesCount = await Service.countDocuments();
+  console.log(servicesCount);
+
+  const apiFeature = new ApiFeatures(Service.find({isApproved:1}), req.query)
+    .search()
+    .filter();
+
+  let services = await apiFeature.query;
+
+  let filteredServicesCount = services.length;
+
+  //apiFeature.pagination(resultPerPage);
+
+  services = await apiFeature.query;
+
+  res.status(200).json({
+    success: true,
+    services,
+    servicesCount,
+    //resultPerPage,
+    filteredServicesCount,
+  });
+});
+
+
+
 // Get All Service
 exports.getAdminServices = catchAsyncErrors(async (req, res, next) => {
   const services = await Service.find();

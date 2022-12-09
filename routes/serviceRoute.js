@@ -9,12 +9,16 @@ const {
   getServiceReviews,
   deleteReview,
   getAdminServices,
+  getApprovedServices
 } = require("../controllers/serviceController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
 
 router.route("/services").get(getAllServices);
+
+router.route("/getApprovedServices").get(getApprovedServices);
+
 
 router
   .route("/admin/services")

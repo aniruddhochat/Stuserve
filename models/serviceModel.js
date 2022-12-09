@@ -39,6 +39,10 @@ const serviceSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Enter Rental or Service"],
   },
+  isApproved:{
+    type: Number,
+    default: 0
+  },
   numOfReviews: {
     type: Number,
     default: 0,

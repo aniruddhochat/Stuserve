@@ -155,16 +155,28 @@ exports.approveProvider = catchAsyncErrors(async (req, res, next) => {
     runValidators: true,
     useFindAndModify: false,
   });
+
+  res.status(200).json({
+    success: true,
+    message: "Provider Aprroved Successfully",
+    user
+  });
 });
 
 // Update approval status for service
 exports.approveService = catchAsyncErrors(async (req, res, next) => {
-  const newUserData = {
+  const newServiceData = {
     isApproved: 1,
   };
-  const user = await Service.findByIdAndUpdate(req.params.id, newUserData, {
+  const service = await Service.findByIdAndUpdate(req.params.id, newServiceData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "Service Aprroved Successfully",
+    service
   });
 });
