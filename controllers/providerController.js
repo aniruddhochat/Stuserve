@@ -210,29 +210,26 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 
 // update Provider Profile
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
-  const newProviderData = {
-    name: req.body.name,
-    email: req.body.email,
-  };
+  const newProviderData = req.body;
 
-  if (req.body.avatar !== "") {
-    const provider = await Provider.findById(req.provider.id);
+  // if (req.body.avatar !== "") {
+  //   const provider = await Provider.findById(req.provider.id);
 
-    const imageId = provider.avatar.public_id;
+  //   const imageId = provider.avatar.public_id;
 
-    // await cloudinary.v2.uploader.destroy(imageId);
+  //   // await cloudinary.v2.uploader.destroy(imageId);
 
-    // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    //   folder: "avatars",
-    //   width: 150,
-    //   crop: "scale",
-    // });
+  //   // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+  //   //   folder: "avatars",
+  //   //   width: 150,
+  //   //   crop: "scale",
+  //   // });
 
-    // newUserData.avatar = {
-    //   public_id: myCloud.public_id,
-    //   url: myCloud.secure_url,
-    // };
-  }
+  //   // newUserData.avatar = {
+  //   //   public_id: myCloud.public_id,
+  //   //   url: myCloud.secure_url,
+  //   // };
+  // }
 
   const provider = await Provider.findByIdAndUpdate(
     req.provider.id,
@@ -246,6 +243,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
+    provider
   });
 });
 
