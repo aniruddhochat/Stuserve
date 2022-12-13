@@ -21,7 +21,7 @@ app.use(fileUpload());
 
 app.use((_, res, next) => {
   // res.set("Access-Control-Allow-Origin", "*"); // or 'localhost:8888'
-  res.set("Access-Control-Allow-Origin", "http://localhost:4200");
+  res.set("Access-Control-Allow-Origin", "http://localhost:4200, https://stuserve-web.herokuapp.com");
   res.set("Access-Control-Allow-Credentials", "true");
   res.set("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
   res.set(
